@@ -1,0 +1,48 @@
+body {
+    background-color: #242424;
+    color: lightgray;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    outline: 0;
+    border: 0;
+    font-family: sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 0;
+    padding-top: 20px;
+}
+
+#content {
+    margin: 0 auto;
+    max-width: 600px;
+    text-align: justify;
+}
+
+.ok {
+    color: gray;
+}
+
+.error {
+    color: red;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+}
+
+#stats {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding: 16px;
+    opacity: 50%;
+    width: 250px;
+}
+
+.stat_wrap > span:nth-child(1){
+    width: 150px;
+    display: inline-block;
+}
+
+
