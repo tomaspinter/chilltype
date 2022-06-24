@@ -1,0 +1,3 @@
+<h1>Reality and judgement</h1>
+
+<div id="screen">When I see anyone weeping in grief because ones child has gone abroad, or is dead, or because he or she has suffered in his or her affairs, I must be careful that the appearance does not misdirect me. Instead, I will distinguish within my own mind, and be prepared to say, "It's not the accident that distresses this person, because it doesn't distress another person; it is the judgment which that person makes about it." As far as words go, however, I will not reduce myself to his level, and certainly do not moan with that person. I will not moan inwardly either.</div>

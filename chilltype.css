@@ -15,6 +15,16 @@ h1 {
     padding-top: 20px;
 }
 
+nav {
+    text-align: center;
+    padding: 16px; 
+}
+
+nav > a {
+    text-decoration: none;
+    padding: 8px;
+}
+
 #content {
     margin: 0 auto;
     max-width: 600px;
@@ -45,4 +55,6 @@ h1 {
     display: inline-block;
 }
 
-
+#article_list > a {
+    display: block;
+}
