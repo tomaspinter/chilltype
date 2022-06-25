@@ -91,10 +91,13 @@ const calculate_accuracy = () => {
     _id('accuracy').innerHTML = `${accuracy.toFixed(2)}%`;
 }
 
-const launch = () => document.addEventListener('keypress', check_typed_letter_and_calculate_stats)
+const launch_type_session = () => document.addEventListener('keypress', check_typed_letter_and_calculate_stats)
 
 const set_full_window_height = () => {
-    document.body.style.height = window.innerHeight + 'px';
+    console.log("body: "+ document.body.scrollHeight)
+    console.log("window: "+ window.innerHeight)
+    if(document.body.scrollHeight < window.innerHeight)
+        document.body.style.height = window.innerHeight + 'px';
 }
 
 
@@ -103,7 +106,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if(_id('stats') != null) {
         IS_TYPING_ARTICLE = true;
         text_to_single_letters();
-        launch();
+        launch_type_session();
     }
 });
 
