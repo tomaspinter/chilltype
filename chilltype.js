@@ -41,17 +41,17 @@ const check_typed_letter_and_calculate_stats = (event) => {
         event.preventDefault()
         typed_letter = event.key;
         letter_el = _id('letter_' + CHECKED_LETTER_NUMBER)
-        text_letter = letter_el.innerHTML;       
-        if (typed_letter == text_letter) {  
-            letter_el.classList.remove('error'); 
-            letter_el.classList.add('ok'); 
+        text_letter = letter_el.innerHTML;
+        if (typed_letter == text_letter) {
+            letter_el.classList.remove('error');
+            letter_el.classList.add('ok');
             CHECKED_LETTER_NUMBER++;
         } else {
             letter_el.classList.add('error');
             MISTAKES++;
-        }    
+        }
         KEY_PRESSES++;
-        calculate_accuracy();       
+        calculate_accuracy();
     } if (CHECKED_LETTER_NUMBER == LETTER_COUNT) {
         calculate_overall_wpm_and_completion_time();
         document.removeEventListener('keypress', check_typed_letter_and_calculate_stats);
@@ -59,7 +59,7 @@ const check_typed_letter_and_calculate_stats = (event) => {
 }
 
 const init_current_wpm_calc = () => {
-    setInterval(calculate_current_wpm, 3000);    
+    setInterval(calculate_current_wpm, 3000);
 }
 
 const calculate_current_wpm = () => {
@@ -138,4 +138,3 @@ class Toggle {
     }
 
 }
-

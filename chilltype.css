@@ -19,12 +19,16 @@ nav, h1, h2, h3, footer {
 }
 
 nav, footer {
-    padding: 16px; 
+    padding: 16px;
 }
 
-nav > a {
+nav > a, footer > button {
     text-decoration: none;
     padding: 8px;
+    color: rgb(161, 39, 161);
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
 }
 
 #content {

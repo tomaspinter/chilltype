@@ -7,4 +7,3 @@
     <li>start typing</li>
     <li>that's it!</li>
 </ol>
-
