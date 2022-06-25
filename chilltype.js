@@ -7,6 +7,8 @@ let KEY_PRESSES = 0;
 let KEY_PRESSES_BEFORE = 0;
 let MISTAKES = 0;
 let TYPING_START_TIME;
+let IS_TYPING_ARTICLE = false;
+let IS_ZEN_MODE = false;
 
 const remove_multiple_spaces_from_text = (text) => {
     return text.replace(/\s{2,}/gm, ' ');
@@ -52,7 +54,7 @@ const check_typed_letter_and_calculate_stats = (event) => {
         calculate_accuracy();       
     } if (CHECKED_LETTER_NUMBER == LETTER_COUNT) {
         calculate_overall_wpm_and_completion_time();
-        document.removeEventListener("keypress", check_typed_letter_and_calculate_stats);
+        document.removeEventListener('keypress', check_typed_letter_and_calculate_stats);
     }
 }
 
@@ -62,7 +64,7 @@ const init_current_wpm_calc = () => {
 
 const calculate_current_wpm = () => {
     let current_wpm = (KEY_PRESSES - KEY_PRESSES_BEFORE) / 5 / 0.05;
-    _id("current_wpm").innerHTML = Math.round(current_wpm);
+    _id('current_wpm').innerHTML = Math.round(current_wpm);
     KEY_PRESSES_BEFORE = KEY_PRESSES;
 }
 
@@ -80,27 +82,60 @@ const calculate_overall_wpm_and_completion_time = () => {
     } else {
         seconds_to_display = total_seconds;
     }
-    _id("overall_wpm").innerHTML = Math.round(total_wpm);
-    _id("completion_time").innerHTML = `${minutes_to_display}m ${seconds_to_display}s`;
+    _id('overall_wpm').innerHTML = Math.round(total_wpm);
+    _id('completion_time').innerHTML = `${minutes_to_display}m ${seconds_to_display}s`;
 }
 
 const calculate_accuracy = () => {
     let accuracy = 100 - (MISTAKES / KEY_PRESSES * 100);
-    _id("accuracy").innerHTML = `${accuracy.toFixed(2)}%`;
+    _id('accuracy').innerHTML = `${accuracy.toFixed(2)}%`;
 }
 
-const launch = () => document.addEventListener("keypress", check_typed_letter_and_calculate_stats)
+const launch = () => document.addEventListener('keypress', check_typed_letter_and_calculate_stats)
 
 const set_full_window_height = () => {
     document.body.style.height = window.innerHeight + 'px';
 }
 
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener('DOMContentLoaded', () => {
     set_full_window_height();
     if(_id('stats') != null) {
+        IS_TYPING_ARTICLE = true;
         text_to_single_letters();
         launch();
     }
 });
+
+class Toggle {
+
+    static stats() {
+        let stats_widget = _id('stats');
+        stats_widget.classList.toggle('hidden');
+    }
+
+    static zen_mode() {
+        let nav = _id('nav_main');
+        let footer = _id('footer');
+        nav.classList.toggle('hidden');
+        footer.classList.toggle('hidden');
+        Toggle.stats();
+        if(!IS_ZEN_MODE) {
+            document.addEventListener('keydown', Toggle._exit_zen_mode_on_escape);
+            document.addEventListener('mousedown', Toggle.zen_mode);
+            IS_ZEN_MODE = true;
+        } else {
+            document.removeEventListener('keydown', Toggle._exit_zen_mode_on_escape);
+            document.removeEventListener('mousedown', Toggle.zen_mode);
+            IS_ZEN_MODE = false;
+        }
+    }
+
+    static _exit_zen_mode_on_escape(event) {
+        if(event.key == 'Escape') {
+            Toggle.zen_mode();
+        }
+    }
+
+}
 

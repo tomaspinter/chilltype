@@ -10,13 +10,15 @@ body {
 }
 
 h1 {
-    text-align: center;
     margin-top: 0;
     padding-top: 20px;
 }
 
-nav {
+nav, h1, h2, h3, footer {
     text-align: center;
+}
+
+nav, footer {
     padding: 16px; 
 }
 
@@ -29,6 +31,8 @@ nav > a {
     margin: 0 auto;
     max-width: 600px;
     text-align: justify;
+    position: relative;
+    height: 100%;
 }
 
 .ok {
@@ -57,4 +61,14 @@ nav > a {
 
 #article_list > a {
     display: block;
+}
+
+footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+.hidden {
+    display: none;
 }
