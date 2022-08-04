@@ -1,4 +1,5 @@
 const _id = (id) => document.getElementById(id);
+const _tag = (tag) => Array.from(document.getElementsByTagName(tag));
 
 
 let LETTER_COUNT = 1;
@@ -15,7 +16,7 @@ const remove_multiple_spaces_from_text = (text) => {
 }
 
 const text_to_single_letters = () => {
-    let text = _id('screen').innerHTML;
+    let text = _id('article').innerHTML;
     text = remove_multiple_spaces_from_text(text);
     let text_arr = text.split('');
     let span_arr = [];
@@ -25,7 +26,7 @@ const text_to_single_letters = () => {
         LETTER_COUNT++;
     })
     let spanned_text = span_arr.join('');
-    _id('screen').innerHTML = spanned_text;
+    _id('article').innerHTML = spanned_text;
 }
 
 const check_typed_letter_and_calculate_stats = (event) => {
@@ -110,34 +111,49 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-class Toggle {
+const View = {
 
-    static stats() {
-        let stats_widget = _id('stats');
-        stats_widget.classList.toggle('hidden');
-    }
+    toggle: {
 
-    static zen_mode() {
-        let nav = _id('nav_main');
-        let footer = _id('footer');
-        nav.classList.toggle('hidden');
-        footer.classList.toggle('hidden');
-        Toggle.stats();
-        if(!IS_ZEN_MODE) {
-            document.addEventListener('keydown', Toggle._exit_zen_mode_on_escape);
-            document.addEventListener('mousedown', Toggle.zen_mode);
-            IS_ZEN_MODE = true;
-        } else {
-            document.removeEventListener('keydown', Toggle._exit_zen_mode_on_escape);
-            document.removeEventListener('mousedown', Toggle.zen_mode);
-            IS_ZEN_MODE = false;
-        }
-    }
+        stats: () => {
+            let stats_widget = _id('stats');
+            stats_widget.classList.toggle('hidden');
+        },
 
-    static _exit_zen_mode_on_escape(event) {
+        zen_mode: () => {
+            let nav = _id('nav_main');
+            let footer = _id('footer');
+            let content = _id('content');
+            let heading = _tag('h1')[0];
+            nav.classList.toggle('hidden');
+            footer.classList.toggle('hidden');
+            content.classList.toggle('flex');
+            heading.classList.toggle('hidden');
+            View.show.stats();
+            if(!IS_ZEN_MODE) {
+                document.addEventListener('keydown', View._exit_zen_mode_on_escape);
+                document.addEventListener('mousedown', View.toggle.zen_mode);
+                IS_ZEN_MODE = true;
+            } else {
+                document.removeEventListener('keydown', View._exit_zen_mode_on_escape);
+                document.removeEventListener('mousedown', View.toggle.zen_mode);
+                IS_ZEN_MODE = false;
+            }
+        },
+    },
+
+    hide: {
+        stats: () => _id('stats').classList.add('hidden'),
+    },
+
+    show: {
+        stats: () => _id('stats').classList.add('hidden'),
+    },
+
+    _exit_zen_mode_on_escape: (event) => {
         if(event.key == 'Escape') {
             Toggle.zen_mode();
         }
-    }
+    },
 
 }

@@ -27,6 +27,7 @@ nav, h1, h2, h3, footer {
 
 nav, footer {
     padding: 16px;
+    z-index: 10;
 }
 
 p {
@@ -64,8 +65,9 @@ nav > a, footer > button {
     right: 0;
     bottom: 0;
     padding: 16px;
-    opacity: 50%;
-    width: 250px;
+    width: 270px;
+    z-index: 2;
+    background-color: #242424;
 }
 
 .stat_wrap > span:nth-child(1){
@@ -85,4 +87,10 @@ footer {
 
 .hidden {
     display: none;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

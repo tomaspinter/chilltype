@@ -1,4 +1,4 @@
-<div id="stats">
+<div id="stats" class="hidden">
     <div class="stat_wrap">
         <span>overall wpm:</span><span id="overall_wpm">0</span>
     </div>
