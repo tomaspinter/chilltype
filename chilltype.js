@@ -15,8 +15,7 @@ const remove_multiple_spaces_from_text = (text) => {
     return text.replace(/\s{2,}/gm, ' ');
 }
 
-const text_to_single_letters = () => {
-    let text = _id('article').innerHTML;
+const text_to_single_letters = (text) => {
     text = remove_multiple_spaces_from_text(text);
     let text_arr = text.split('');
     let span_arr = [];
@@ -106,7 +105,7 @@ const set_full_window_height = () => {
 const go_type = () => {
     if(_id('article') != null) {
         IS_TYPING_ARTICLE = true;
-        text_to_single_letters();
+        text_to_single_letters(get_random_text());
         launch_type_session();
     }
 }
@@ -206,4 +205,15 @@ const type_again = () => {
     reset_for_retype();
     launch_type_session();
     View.toggle.type_again_button();
+}
+
+
+// min and max included 
+const rnd = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+
+const get_random_text = () => {
+    let min = 0;
+    // from texts.js
+    let max = TEXTS.length - 1;
+    return TEXTS[rnd(min, max)]
 }
