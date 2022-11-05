@@ -28,7 +28,7 @@ Flight::route('/type-your-own-text', function(){
     render_typing_page('own_text');
 });
 
-Flight::route('/random-text', function(){
+Flight::route('/type-random-text', function(){
     render_typing_page('random_text');
 });
 

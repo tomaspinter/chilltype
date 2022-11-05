@@ -1,6 +1,8 @@
 :root {
     --magentish: rgb(161, 39, 161);
-    --default_bg_color: #242424
+    --default_bg_color: #242424;
+    --secondary_bg_color: #181818;
+    --border_radius: 8px;
   }
 
 * {
@@ -34,6 +36,11 @@ nav, footer {
 
 p {
     text-align: justify;
+    line-height: 1.5;
+}
+
+button {
+    cursor: pointer;
 }
 
 nav > a, footer > button {
@@ -71,16 +78,22 @@ nav > a, footer > button {
     padding: 16px;
     width: 270px;
     z-index: 2;
-    background-color: var(--default_bg_color);
+    background-color: var(--secondary_bg_color);
+    border-radius: var(--border_radius);
+}
+
+#close_stats_btn {
+    background-color: var(--magentish);
+    border: none;
+    border-radius: var(--border_radius);
+    position: relative;
+    top: -10px;
+    left: -10px;
 }
 
 .stat_wrap > span:nth-child(1){
     width: 150px;
     display: inline-block;
-}
-
-#article_list > a {
-    display: block;
 }
 
 footer {
@@ -102,8 +115,8 @@ footer {
     height: 60%;
     padding: 8px;
     line-height: 1.5;
-    border-radius: 8px;
-    background-color: #181818;
+    border-radius: var(--border_radius);
+    background-color: var(--secondary_bg_color);
     color: gray;
     border: none;
 }
@@ -112,7 +125,7 @@ footer {
     background-color: var(--magentish);
     text-align: center;
     border: 1px solid var(--default_bg_color);
-    border-radius: 8px;
+    border-radius: var(--border_radius);
     padding: 4px;
     margin: auto;
     display: block

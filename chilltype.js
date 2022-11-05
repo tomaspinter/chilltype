@@ -8,7 +8,6 @@ let KEY_PRESSES = 0;
 let KEY_PRESSES_BEFORE = 0;
 let MISTAKES = 0;
 let TYPING_START_TIME;
-let IS_TYPING_ARTICLE = false;
 let IS_ZEN_MODE = false;
 
 const remove_multiple_spaces_from_text = (text) => {
@@ -40,7 +39,6 @@ const check_typed_letter_and_calculate_stats = (event) => {
     if (CHECKED_LETTER_NUMBER < LETTER_COUNT) {
         event.preventDefault()
         typed_letter = event.key;
-        console.log(CHECKED_LETTER_NUMBER);
         letter_el = _id('letter_' + CHECKED_LETTER_NUMBER);
         text_letter = letter_el.innerHTML;
         if (typed_letter == text_letter) {
@@ -102,17 +100,11 @@ const set_full_window_height = () => {
         document.body.style.height = window.innerHeight + 'px';
 }
 
-const go_type = () => {
+window.addEventListener('DOMContentLoaded', () => {
     if(_id('article') != null) {
-        IS_TYPING_ARTICLE = true;
         text_to_single_letters(get_random_text());
         launch_type_session();
     }
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-    // set_full_window_height();
-    go_type();
 });
 
 const View = {
@@ -157,7 +149,7 @@ const View = {
 
     _exit_zen_mode_on_escape: (event) => {
         if(event.key == 'Escape') {
-            Toggle.zen_mode();
+            View.toggle.zen_mode();
         }
     },
 }
@@ -165,14 +157,14 @@ const View = {
 const type_own_text = () => {
     let text_field = _id('own_text_field')
     let text = text_field.value;
-    console.log(text);
     if (text.length > 0) {
         article_el = _id('pre_article');
         article_el.innerHTML = text;
         article_el.id = 'article'
         text_field.style.display = 'none';
         View.toggle.type_button();
-        go_type();
+        text_to_single_letters(text);
+        launch_type_session();
     }
 }
 
@@ -206,7 +198,6 @@ const type_again = () => {
     launch_type_session();
     View.toggle.type_again_button();
 }
-
 
 // min and max included 
 const rnd = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
