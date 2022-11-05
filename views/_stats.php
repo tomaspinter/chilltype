@@ -1,5 +1,8 @@
 <div id="stats" class="hidden">
     <div class="stat_wrap">
+        <span></span><span id="close stats"><button onclick="View.toggle.stats();">&#x2715</button></span>
+    </div>
+    <div class="stat_wrap">
         <span>overall wpm:</span><span id="overall_wpm">0</span>
     </div>
     <div class="stat_wrap">

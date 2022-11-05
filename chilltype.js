@@ -41,7 +41,8 @@ const check_typed_letter_and_calculate_stats = (event) => {
     if (CHECKED_LETTER_NUMBER < LETTER_COUNT) {
         event.preventDefault()
         typed_letter = event.key;
-        letter_el = _id('letter_' + CHECKED_LETTER_NUMBER)
+        console.log(CHECKED_LETTER_NUMBER);
+        letter_el = _id('letter_' + CHECKED_LETTER_NUMBER);
         text_letter = letter_el.innerHTML;
         if (typed_letter == text_letter) {
             letter_el.classList.remove('error');
@@ -55,6 +56,7 @@ const check_typed_letter_and_calculate_stats = (event) => {
         calculate_accuracy();
     } if (CHECKED_LETTER_NUMBER == LETTER_COUNT) {
         calculate_overall_wpm_and_completion_time();
+        View.toggle.type_again_button();
         document.removeEventListener('keypress', check_typed_letter_and_calculate_stats);
     }
 }
@@ -94,40 +96,44 @@ const calculate_accuracy = () => {
 
 const launch_type_session = () => document.addEventListener('keypress', check_typed_letter_and_calculate_stats)
 
+// TODO required?
 const set_full_window_height = () => {
-    console.log("body: "+ document.body.scrollHeight)
-    console.log("window: "+ window.innerHeight)
-    if(document.body.scrollHeight < window.innerHeight)
+    let footer_height = _id('footer_wrap').offsetHeight;
+    if(document.body.scrollHeight < window.innerHeight + footer_height)
         document.body.style.height = window.innerHeight + 'px';
 }
 
-
-window.addEventListener('DOMContentLoaded', () => {
-    set_full_window_height();
-    if(_id('stats') != null) {
+const go_type = () => {
+    if(_id('article') != null) {
         IS_TYPING_ARTICLE = true;
         text_to_single_letters();
         launch_type_session();
     }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    // set_full_window_height();
+    go_type();
 });
 
 const View = {
 
     toggle: {
 
-        stats: () => {
-            let stats_widget = _id('stats');
-            stats_widget.classList.toggle('hidden');
-        },
+        stats: () => _id('stats').classList.toggle('hidden'),
+
+        type_again_button: () => _id('type_again_btn').classList.toggle('hidden'),
+
+        type_button: () => _id('type_btn').classList.toggle('hidden'),
 
         zen_mode: () => {
             let nav = _id('nav_main');
-            let footer = _id('footer');
+            let footer = _id('footer_wrap');
             let content = _id('content');
             let heading = _tag('h1')[0];
             nav.classList.toggle('hidden');
             footer.classList.toggle('hidden');
-            content.classList.toggle('flex');
+            // content.classList.toggle('flex');
             heading.classList.toggle('hidden');
             View.show.stats();
             if(!IS_ZEN_MODE) {
@@ -139,7 +145,7 @@ const View = {
                 document.removeEventListener('mousedown', View.toggle.zen_mode);
                 IS_ZEN_MODE = false;
             }
-        },
+        },        
     },
 
     hide: {
@@ -155,5 +161,49 @@ const View = {
             Toggle.zen_mode();
         }
     },
+}
 
+const type_own_text = () => {
+    let text_field = _id('own_text_field')
+    let text = text_field.value;
+    console.log(text);
+    if (text.length > 0) {
+        article_el = _id('pre_article');
+        article_el.innerHTML = text;
+        article_el.id = 'article'
+        text_field.style.display = 'none';
+        View.toggle.type_button();
+        go_type();
+    }
+}
+
+const reset_counters = () => {
+    // not this one! LETTER_COUNT = 1;
+    CHECKED_LETTER_NUMBER = 1;
+    KEY_PRESSES = 0;
+    KEY_PRESSES_BEFORE = 0;
+    MISTAKES = 0;
+    TYPING_START_TIME;
+}
+
+const reset_letter_colors = () => {
+    let letters = _id('article').getElementsByTagName('span');
+    Array.from(letters).forEach(l => l.className = '')
+}
+
+const reset_for_retype = () => {
+    reset_counters();
+    reset_letter_colors();
+    reset_stats();
+}
+
+const reset_stats = () => {
+    _id('overall_wpm').innerHTML = '0'
+    _id('completion_time').innerHTML = '-';
+}
+
+const type_again = () => {
+    reset_for_retype();
+    launch_type_session();
+    View.toggle.type_again_button();
 }

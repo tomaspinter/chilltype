@@ -19,7 +19,7 @@ function render($file, $args = []) {
     Flight::render('_head.php');
     Flight::render('_nav.php', ['random_article' => Flight::get('random_article')]);
     Flight::render($file, $args);
-    Flight::render('_footer.php');
+    // Flight::render('_footer.php');
 }
 
 function render_typing_post($file) {
@@ -32,6 +32,18 @@ function render_typing_post($file) {
 
 Flight::route('/home', function(){
     render('home');
+});
+
+Flight::route('/about', function(){
+    render('about');
+});
+
+Flight::route('/type_your_own_text', function(){
+    Flight::render('_head.php');
+    Flight::render('_nav.php', ['random_article' => Flight::get('random_article')]);
+    Flight::render('own_text');
+    Flight::render('_stats');
+    Flight::render('_footer.php');
 });
 
 Flight::route('/articles', function() use ($articles){
