@@ -137,7 +137,7 @@ const View = {
             heading.classList.toggle('hidden');
             View.toggle.id('nav_main');
             View.toggle.id('footer_wrap');
-            View.show.stats();
+            View.show.id('stats');
             if(!IS_ZEN_MODE) {
                 document.addEventListener('keydown', View._exit_zen_mode_on_escape);
                 document.addEventListener('mousedown', View.toggle.zen_mode);
@@ -152,7 +152,7 @@ const View = {
 
     hide: {
         id: (id) => _id(id).classList.add('hidden'),
-        element: (el) => el.classList.add('hidden')
+        element: (el) => el.classList.add('hidden'),
     },
 
     show: {
@@ -171,7 +171,7 @@ const View = {
         },
         letter_colors: () => {
             let letters = _id('article').getElementsByTagName('span');
-            Array.from(letters).forEach(l => l.className = '')
+            Array.from(letters).forEach(l => l.className = '');
         },
     },
 
