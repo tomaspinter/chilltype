@@ -15,7 +15,7 @@ let TYPING_START_TIME;
 let IS_ZEN_MODE = false;
 
 const remove_multiple_spaces_from_text = (text) => {
-    return text.replace(/\s{2,}/gm, ' ');
+    return text.replace(/\s{1,}/gm, ' ');
 }
 
 const text_to_single_letters = (text) => {
