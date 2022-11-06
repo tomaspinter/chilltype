@@ -52,13 +52,14 @@ const check_typed_letter_and_calculate_stats = (event) => {
         TYPING_START_TIME = Date.now();
         init_current_wpm_calc();
     }
-    // console.log(event.key);
+    console.log(event.key);
     if (CHECKED_LETTER_NUMBER < LETTER_COUNT) {
         event.preventDefault()
         typed_letter = event.key;
         letter_el = _id('letter_' + CHECKED_LETTER_NUMBER);
         text_letter = letter_el.innerHTML;
-        if (typed_letter == text_letter) {
+        // Enter key can supplement any char -> in case there is untypable char in text
+        if (typed_letter == text_letter || typed_letter == 'Enter') {
             letter_el.classList.remove('error');
             letter_el.classList.add('ok');
             CHECKED_LETTER_NUMBER++;
