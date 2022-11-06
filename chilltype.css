@@ -82,10 +82,13 @@ nav > a, footer > button {
     border-radius: var(--border_radius);
 }
 
-#close_stats_btn {
+#close_stats_btn, #close_help_btn {
     background-color: var(--magentish);
     border: none;
     border-radius: var(--border_radius);
+}
+
+#close_stats_btn {
     position: relative;
     top: -10px;
     left: -10px;
@@ -149,4 +152,11 @@ p > a {
 
 #type_btn_div {
     text-align: center;
+}
+
+#help_div {
+    background-color: var(--secondary_bg_color);
+    border-radius: var(--border_radius);
+    padding: 8px;
+    line-height: 1.5;
 }

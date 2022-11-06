@@ -17,16 +17,39 @@
         </div>
         <div>
             <footer id="footer">
+                <button id="help_switch"
+                        onclick="View.toggle.id('help_div');"
+                        >help
+                </button>
                 <button id="zen_mode_switch"
                         onclick="View.toggle.zen_mode();"
                         >zen mode
                 </button>
+                
                 <!-- blur() to prevent stats view toggle on 'space' press -->
                 <button id="stats_switch"
                         onclick="View.toggle.id('stats');this.blur();"
                         >stats
                 </button>
             </footer>
+            <div id="help_div">
+                <button id="close_help_btn" onclick="View.hide.id('help_div');">&#x2715</button>
+                <ul>
+                    <li>
+                        <b>zen mode</b> hides all page elements but the text it self. <b>Click</b> anywhere or press <b>Escape</b> to exit
+                    </li>
+                    <li>
+                        <b>stats</b> show you your typing statistics regarding the current text
+                    </li>
+                    <li>
+                        if you encounter a character in your text that cannot be typed on your keyboard with a single key stroke, press the <b>Enter</b> key. (In fact <b>Enter</b> can supplement any character)
+                    </li>
+                    <li>
+                        if you use your own text, note that new or empty lines are converted to a single space
+                    </li>
+                    
+                </ul>
+            </div>
         </div> 
     </div>
 </div> <!-- end of #content -->
