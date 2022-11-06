@@ -14,6 +14,19 @@ let MISTAKES = 0;
 let TYPING_START_TIME;
 let IS_ZEN_MODE = false;
 
+const reset_counters_for_retype = () => {
+    CHECKED_LETTER_NUMBER = 1;
+    KEY_PRESSES = 0;
+    KEY_PRESSES_BEFORE = 0;
+    MISTAKES = 0;
+    TYPING_START_TIME;
+}
+
+const reset_counters_for_next_text = () => {
+    LETTER_COUNT = 1;
+    reset_counters_for_retype();
+}
+
 const remove_multiple_spaces_from_text = (text) => {
     return text.replace(/\s{1,}/gm, ' ');
 }
@@ -68,7 +81,7 @@ const init_current_wpm_calc = () => {
 
 const calculate_current_wpm = () => {
     let current_wpm = (KEY_PRESSES - KEY_PRESSES_BEFORE) / 5 / 0.05;
-    _id('current_wpm').innerHTML = Math.round(current_wpm);
+    View.set.id('current_wpm', Math.round(current_wpm));
     KEY_PRESSES_BEFORE = KEY_PRESSES;
 }
 
@@ -150,6 +163,18 @@ const View = {
         id: (id, text) => _id(id).innerHTML = text,
     },
 
+    reset: {
+        stats: () => {
+            View.set.id('overall_wpm', '0');
+            View.set.id('completion_time', '-');
+            View.set.id('accuracy', `0.00%`);
+        },
+        letter_colors: () => {
+            let letters = _id('article').getElementsByTagName('span');
+            Array.from(letters).forEach(l => l.className = '')
+        },
+    },
+
     _exit_zen_mode_on_escape: (event) => {
         if(event.key == 'Escape') {
             View.toggle.zen_mode();
@@ -163,7 +188,7 @@ const type_own_text = () => {
         let text = text_field.value;
         if (text.length > 0) {
             View.set.id('article', text)
-            text_field.style.display = 'none';
+            View.hide.element(text_field);
             View.toggle.id('type_btn');
             text_to_single_letters(text);
             launch_type_session();
@@ -175,38 +200,15 @@ const type_own_text = () => {
 const reset_view_for_next_js_text = () => {
     View.toggle.id('type_again_div');
     reset_counters_for_next_text();
-    reset_stats();
+    View.reset.stats();
     text_to_single_letters(get_random_text());
     launch_type_session();
 }
 
-const reset_counters_for_retype = () => {
-    CHECKED_LETTER_NUMBER = 1;
-    KEY_PRESSES = 0;
-    KEY_PRESSES_BEFORE = 0;
-    MISTAKES = 0;
-    TYPING_START_TIME;
-}
-
-const reset_counters_for_next_text = () => {
-    LETTER_COUNT = 1;
-    reset_counters_for_retype();
-}
-
-const reset_letter_colors = () => {
-    let letters = _id('article').getElementsByTagName('span');
-    Array.from(letters).forEach(l => l.className = '')
-}
-
 const reset_for_retype = () => {
     reset_counters_for_retype();
-    reset_letter_colors();
-    reset_stats();
-}
-
-const reset_stats = () => {
-    View.set.id('overall_wpm', '0');
-    View.set.id('completion_time', '-');
+    View.reset.letter_colors();
+    View.reset.stats();
 }
 
 const type_again = () => {
