@@ -2,9 +2,9 @@ const _id = (id) => document.getElementById(id);
 const _tag = (tag) => Array.from(document.getElementsByTagName(tag));
 
 // url dependent!
-let url = window.location.pathname;
-let IS_JS_TEXT = url.includes('type-random-text');
-let IS_OWN_TEXT = url.includes('type-your-own-text');
+let URL_PATH_NAME = window.location.pathname;
+let IS_JS_TEXT = URL_PATH_NAME.includes('type-random-text');
+let IS_OWN_TEXT = URL_PATH_NAME.includes('type-your-own-text');
 
 let LETTER_COUNT = 1;
 let CHECKED_LETTER_NUMBER = 1;
@@ -13,6 +13,16 @@ let KEY_PRESSES_BEFORE = 0;
 let MISTAKES = 0;
 let TYPING_START_TIME;
 let IS_ZEN_MODE = false;
+
+const mark_current_page_in_nav = () => {
+    let host = window.location.host;
+    let a_list = _id('nav_main').getElementsByTagName('a');
+    Array.from(a_list).forEach(a => {
+        if (a.href.split(host)[1] == URL_PATH_NAME) {
+            a.classList.add('current');
+        }
+    })
+}
 
 const reset_counters_for_retype = () => {
     CHECKED_LETTER_NUMBER = 1;
@@ -119,6 +129,7 @@ const set_full_window_height = () => {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+    mark_current_page_in_nav();
     if(IS_JS_TEXT) {
         // text_to_single_letters('txt');
         text_to_single_letters(get_random_text());

@@ -54,6 +54,10 @@ nav > a, footer > button {
     font-size: 16px;
 }
 
+.current {
+    text-decoration: underline!important;
+}
+
 #content {
     margin: 0 auto;
     max-width: 600px;

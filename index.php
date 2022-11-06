@@ -16,7 +16,7 @@ function render_typing_page($file) {
     Flight::render('_footer.php');
 }
 
-Flight::route('/home', function(){
+Flight::route('/', function(){
     render('home');
 });
 
