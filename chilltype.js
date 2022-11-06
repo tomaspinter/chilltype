@@ -1,6 +1,10 @@
 const _id = (id) => document.getElementById(id);
 const _tag = (tag) => Array.from(document.getElementsByTagName(tag));
 
+// url dependent!
+let url = window.location.pathname;
+let IS_JS_TEXT = url.includes('type-random-text');
+let IS_OWN_TEXT = url.includes('type-your-own-text');
 
 let LETTER_COUNT = 1;
 let CHECKED_LETTER_NUMBER = 1;
@@ -53,7 +57,7 @@ const check_typed_letter_and_calculate_stats = (event) => {
         calculate_accuracy();
     } if (CHECKED_LETTER_NUMBER == LETTER_COUNT) {
         calculate_overall_wpm_and_completion_time();
-        View.toggle.type_again_button();
+        View.toggle.id('type_again_div');
         document.removeEventListener('keypress', check_typed_letter_and_calculate_stats);
     }
 }
@@ -101,9 +105,11 @@ const set_full_window_height = () => {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    if(_id('article') != null) {
+    if(IS_JS_TEXT) {
+        // text_to_single_letters('txt');
         text_to_single_letters(get_random_text());
         launch_type_session();
+        View.hide.id('another_own_text_btn');
     }
 });
 
@@ -111,21 +117,13 @@ const View = {
 
     toggle: {
 
-        stats: () => _id('stats').classList.toggle('hidden'),
-
-        type_again_button: () => _id('type_again_btn').classList.toggle('hidden'),
-
-        type_button: () => _id('type_btn').classList.toggle('hidden'),
-
+        id: (id) => _id(id).classList.toggle('hidden'),
+        
         zen_mode: () => {
-            let nav = _id('nav_main');
-            let footer = _id('footer_wrap');
-            let content = _id('content');
             let heading = _tag('h1')[0];
-            nav.classList.toggle('hidden');
-            footer.classList.toggle('hidden');
-            // content.classList.toggle('flex');
             heading.classList.toggle('hidden');
+            View.toggle.id('nav_main');
+            View.toggle.id('footer_wrap');
             View.show.stats();
             if(!IS_ZEN_MODE) {
                 document.addEventListener('keydown', View._exit_zen_mode_on_escape);
@@ -140,11 +138,11 @@ const View = {
     },
 
     hide: {
-        stats: () => _id('stats').classList.add('hidden'),
+        id: (id) => _id(id).classList.add('hidden'),
     },
 
     show: {
-        stats: () => _id('stats').classList.add('hidden'),
+        id: (id) => _id(id).classList.add('hidden'),
     },
 
     _exit_zen_mode_on_escape: (event) => {
@@ -155,26 +153,40 @@ const View = {
 }
 
 const type_own_text = () => {
-    let text_field = _id('own_text_field')
-    let text = text_field.value;
-    if (text.length > 0) {
-        article_el = _id('pre_article');
-        article_el.innerHTML = text;
-        article_el.id = 'article'
-        text_field.style.display = 'none';
-        View.toggle.type_button();
-        text_to_single_letters(text);
-        launch_type_session();
+    if (IS_OWN_TEXT) {
+        let text_field = _id('own_text_field')
+        let text = text_field.value;
+        if (text.length > 0) {
+            article_el = _id('article');
+            article_el.innerHTML = text;
+            text_field.style.display = 'none';
+            View.toggle.id('type_btn');
+            text_to_single_letters(text);
+            launch_type_session();
+        }
+        View.hide.id('another_js_text_btn');
     }
 }
 
-const reset_counters = () => {
-    // not this one! LETTER_COUNT = 1;
+const reset_view_for_next_js_text = () => {
+    View.toggle.id('type_again_div');
+    reset_counters_for_next_text();
+    reset_stats();
+    text_to_single_letters(get_random_text());
+    launch_type_session();
+}
+
+const reset_counters_for_retype = () => {
     CHECKED_LETTER_NUMBER = 1;
     KEY_PRESSES = 0;
     KEY_PRESSES_BEFORE = 0;
     MISTAKES = 0;
     TYPING_START_TIME;
+}
+
+const reset_counters_for_next_text = () => {
+    LETTER_COUNT = 1;
+    reset_counters_for_retype();
 }
 
 const reset_letter_colors = () => {
@@ -183,7 +195,7 @@ const reset_letter_colors = () => {
 }
 
 const reset_for_retype = () => {
-    reset_counters();
+    reset_counters_for_retype();
     reset_letter_colors();
     reset_stats();
 }
@@ -196,7 +208,7 @@ const reset_stats = () => {
 const type_again = () => {
     reset_for_retype();
     launch_type_session();
-    View.toggle.type_again_button();
+    View.toggle.id('type_again_div');
 }
 
 // min and max included 

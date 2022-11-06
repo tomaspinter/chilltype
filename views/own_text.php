@@ -7,6 +7,8 @@
           placeholder='Paste your text here and hit the Type button. 
 Note that your text wont persist after you navigate away from this page!'></textarea>
 
-<p id='pre_article'></p>
+<p id='article'></p>
 
-<button id='type_btn' class='action_btn' onclick="type_own_text();">Type</button>
+<div id='type_btn_div'>
+    <button id='type_btn' class='action_btn' onclick="type_own_text();">Type</button>
+</div>

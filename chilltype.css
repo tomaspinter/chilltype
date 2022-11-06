@@ -25,7 +25,7 @@ h1 {
     margin-top: 0;
 }
 
-nav, h1, h2, h3, footer, #footer_wrap {
+nav, h1, h2, h3, footer {
     text-align: center;
 }
 
@@ -124,13 +124,29 @@ footer {
 .action_btn {
     background-color: var(--magentish);
     text-align: center;
-    border: 1px solid var(--default_bg_color);
+    border: 1px solid var(--magentish);
     border-radius: var(--border_radius);
     padding: 4px;
     margin: auto;
-    display: block
+}
+
+.action_btn * {
+    text-decoration: none;
+    color: black;
 }
 
 p > a {
     color: var(--magentish);
+}
+
+#type_again_div {
+    text-align-last: center;
+}
+
+#type_again_div > * {
+    display: inline;
+}
+
+#type_btn_div {
+    text-align: center;
 }
