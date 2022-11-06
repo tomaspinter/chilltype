@@ -32,7 +32,7 @@
                         >stats
                 </button>
             </footer>
-            <div id="help_div">
+            <div id="help_div" class="hidden">
                 <button id="close_help_btn" onclick="View.hide.id('help_div');">&#x2715</button>
                 <ul>
                     <li>
