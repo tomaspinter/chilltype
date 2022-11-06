@@ -21,8 +21,9 @@
                         onclick="View.toggle.zen_mode();"
                         >zen mode
                 </button>
+                <!-- blur() to prevent stats view toggle on 'space' press -->
                 <button id="stats_switch"
-                        onclick="View.toggle.id('stats');"
+                        onclick="View.toggle.id('stats');this.blur();"
                         >stats
                 </button>
             </footer>

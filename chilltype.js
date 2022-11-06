@@ -28,7 +28,7 @@ const text_to_single_letters = (text) => {
         LETTER_COUNT++;
     })
     let spanned_text = span_arr.join('');
-    _id('article').innerHTML = spanned_text;
+    View.set.id('article', spanned_text);
 }
 
 const check_typed_letter_and_calculate_stats = (event) => {
@@ -86,13 +86,13 @@ const calculate_overall_wpm_and_completion_time = () => {
     } else {
         seconds_to_display = total_seconds;
     }
-    _id('overall_wpm').innerHTML = Math.round(total_wpm);
-    _id('completion_time').innerHTML = `${minutes_to_display}m ${seconds_to_display}s`;
+    View.set.id('overall_wpm', Math.round(total_wpm))
+    View.set.id('completion_time', `${minutes_to_display}m ${seconds_to_display}s`);
 }
 
 const calculate_accuracy = () => {
     let accuracy = 100 - (MISTAKES / KEY_PRESSES * 100);
-    _id('accuracy').innerHTML = `${accuracy.toFixed(2)}%`;
+    View.set.id('accuracy', `${accuracy.toFixed(2)}%`);
 }
 
 const launch_type_session = () => document.addEventListener('keypress', check_typed_letter_and_calculate_stats)
@@ -139,10 +139,15 @@ const View = {
 
     hide: {
         id: (id) => _id(id).classList.add('hidden'),
+        element: (el) => el.classList.add('hidden')
     },
 
     show: {
         id: (id) => _id(id).classList.add('hidden'),
+    },
+
+    set: {
+        id: (id, text) => _id(id).innerHTML = text,
     },
 
     _exit_zen_mode_on_escape: (event) => {
@@ -157,8 +162,7 @@ const type_own_text = () => {
         let text_field = _id('own_text_field')
         let text = text_field.value;
         if (text.length > 0) {
-            article_el = _id('article');
-            article_el.innerHTML = text;
+            View.set.id('article', text)
             text_field.style.display = 'none';
             View.toggle.id('type_btn');
             text_to_single_letters(text);
@@ -201,8 +205,8 @@ const reset_for_retype = () => {
 }
 
 const reset_stats = () => {
-    _id('overall_wpm').innerHTML = '0'
-    _id('completion_time').innerHTML = '-';
+    View.set.id('overall_wpm', '0');
+    View.set.id('completion_time', '-');
 }
 
 const type_again = () => {
