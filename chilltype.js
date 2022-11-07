@@ -13,6 +13,7 @@ let KEY_PRESSES_BEFORE = 0;
 let MISTAKES = 0;
 let TYPING_START_TIME;
 let IS_ZEN_MODE = false;
+let PREVIOUS_TEXT_INDEX_ARR = [];
 
 const mark_current_page_in_nav = () => {
     let host = window.location.host;
@@ -234,7 +235,21 @@ const rnd = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
 const get_random_text = () => {
     let min = 0;
-    // from texts.js
+    // TEXTS from texts.js
     let max = TEXTS.length - 1;
-    return TEXTS[rnd(min, max)]
+    let is_ok = false;
+    let not_to_repeat_text_count = 5;
+    let x
+    do {
+        x = rnd(min, max);
+        if (!PREVIOUS_TEXT_INDEX_ARR.includes(x)) {
+            is_ok = true;
+            PREVIOUS_TEXT_INDEX_ARR.push(x);
+        } 
+        if (PREVIOUS_TEXT_INDEX_ARR.length > not_to_repeat_text_count) {
+            PREVIOUS_TEXT_INDEX_ARR.shift();
+        }
+        console.log(PREVIOUS_TEXT_INDEX_ARR);
+    } while (!is_ok);
+    return TEXTS[x]
 }
