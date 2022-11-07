@@ -198,9 +198,9 @@ const View = {
 const type_own_text = () => {
     if (IS_OWN_TEXT) {
         let text_field = _id('own_text_field')
-        let text = text_field.value;
+        let text = text_field.value.trim();
         if (text.length > 0) {
-            View.set.id('article', text)
+            // View.set.id('article', text)
             View.hide.element(text_field);
             View.toggle.id('type_btn');
             text_to_single_letters(text);
@@ -251,5 +251,5 @@ const get_random_text = () => {
         }
         console.log(PREVIOUS_TEXT_INDEX_ARR);
     } while (!is_ok);
-    return TEXTS[x]
+    return TEXTS[x].trim();
 }
