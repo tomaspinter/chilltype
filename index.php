@@ -24,6 +24,10 @@ Flight::route('/about', function(){
     render('about');
 });
 
+Flight::route('/support', function(){
+    render('support');
+});
+
 Flight::route('/type-your-own-text', function(){
     render_typing_page('own_text');
 });

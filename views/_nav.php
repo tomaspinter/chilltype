@@ -3,5 +3,5 @@
     <a href="/type-random-text">random text</a>
     <a href="/type-your-own-text">own text</a>
     <a href="/about">about</a>
-    <a href="https://www.paypal.com/paypalme/tomaspinter/5" target="_blank">support</a>
+    <a href="/support">support</a>
 </nav>
