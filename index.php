@@ -36,4 +36,9 @@ Flight::route('/type-random-text', function(){
     render_typing_page('random_text');
 });
 
+Flight::map('notFound', function(){
+    render('404');
+});
+
+
 Flight::start();
