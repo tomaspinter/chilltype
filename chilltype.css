@@ -1,6 +1,6 @@
 :root {
     --magentish: rgb(161, 39, 161);
-    --default_bg_color: #242424;
+    --default_bg_color: #1B1D1E;
     --secondary_bg_color: #181818;
     --border_radius: 8px;
   }
@@ -84,6 +84,8 @@ nav > a, footer > button {
     z-index: 2;
     background-color: var(--secondary_bg_color);
     border-radius: var(--border_radius);
+    border: 1px solid var(--magentish);
+    margin: 3px;
 }
 
 #close_stats_btn, #close_help_btn {
@@ -163,6 +165,7 @@ p > a {
     border-radius: var(--border_radius);
     padding: 8px;
     line-height: 1.5;
+    border: 1px solid var(--magentish);
 }
 
 .paypal_btn {
@@ -173,7 +176,6 @@ p > a {
     text-decoration: none;
     color: white;
     margin: auto;
-    /* font-weight: 900; */
 }
 .support_btn_div {
     text-align: center;

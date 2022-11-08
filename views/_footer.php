@@ -36,10 +36,10 @@
                 <button id="close_help_btn" onclick="View.hide.id('help_div');">&#x2715</button>
                 <ul>
                     <li>
-                        <b>zen mode</b> hides all page elements but the text it self. <b>Click</b> anywhere or press <b>Escape</b> to exit
+                        <b>zen mode</b> hides all page elements but the text itself. <b>Click</b> anywhere or press <b>Escape</b> to exit
                     </li>
                     <li>
-                        <b>stats</b> show you your typing statistics regarding the current text
+                        <b>stats</b> show your typing statistics regarding the current text
                     </li>
                     <li>
                         if you encounter a character in your text that cannot be typed on your keyboard with a single key stroke, press the <b>Enter</b> key. (In fact <b>Enter</b> can supplement any character)
