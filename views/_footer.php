@@ -42,7 +42,7 @@
                         <b>stats</b> show your typing statistics regarding the current text
                     </li>
                     <li>
-                        if you encounter a character in your text that cannot be typed on your keyboard with a single key stroke, press the <b>Enter</b> key. (In fact <b>Enter</b> can supplement any character)
+                        if you encounter a character in your text that cannot be typed on your keyboard, press the <b>Enter</b> key. (In fact <b>Enter</b> can supplement any character)
                     </li>
                     <li>
                         if you use your own text, note that new or empty lines are converted to a single space
