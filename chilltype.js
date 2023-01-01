@@ -14,6 +14,7 @@ let MISTAKES = 0;
 let TYPING_START_TIME;
 let IS_ZEN_MODE = false;
 let PREVIOUS_TEXT_INDEX_ARR = [];
+let CURRENT_WPM_TIMER_INTERVAL_ID
 
 const mark_current_page_in_nav = () => {
     let host = window.location.host;
@@ -31,6 +32,7 @@ const reset_counters_for_retype = () => {
     KEY_PRESSES_BEFORE = 0;
     MISTAKES = 0;
     TYPING_START_TIME;
+    stop_current_wpm_calc();
 }
 
 const reset_counters_for_next_text = () => {
@@ -63,7 +65,7 @@ const check_typed_letter_and_calculate_stats = (event) => {
         TYPING_START_TIME = Date.now();
         init_current_wpm_calc();
     }
-    console.log(event.key);
+    // console.log(event.key);
     if (CHECKED_LETTER_NUMBER < LETTER_COUNT) {
         event.preventDefault()
         typed_letter = event.key;
@@ -88,7 +90,11 @@ const check_typed_letter_and_calculate_stats = (event) => {
 }
 
 const init_current_wpm_calc = () => {
-    setInterval(calculate_current_wpm, 3000);
+    CURRENT_WPM_TIMER_INTERVAL_ID = setInterval(calculate_current_wpm, 3000);
+}
+
+const stop_current_wpm_calc = () => {
+    clearInterval(CURRENT_WPM_TIMER_INTERVAL_ID);
 }
 
 const calculate_current_wpm = () => {
@@ -249,7 +255,6 @@ const get_random_text = () => {
         if (PREVIOUS_TEXT_INDEX_ARR.length > not_to_repeat_text_count) {
             PREVIOUS_TEXT_INDEX_ARR.shift();
         }
-        console.log(PREVIOUS_TEXT_INDEX_ARR);
     } while (!is_ok);
     return TEXTS[x].trim();
 }
